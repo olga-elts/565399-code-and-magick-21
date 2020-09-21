@@ -6,12 +6,12 @@ const CLOUD = {
   width: 420,
   height: 270,
   radius: 20,
-  color: '#fff'
+  color: `#fff`
 };
 
 const SHADOW = {
   shift: 10,
-  color: 'rgba(0, 0, 0, 0.7)'
+  color: `rgba(0, 0, 0, 0.7)`
 };
 
 const BAR = {
@@ -20,15 +20,15 @@ const BAR = {
   width: 40,
   maxHeight: 150,
   gap: 50,
-  mainColor: 'rgba(255, 0, 0, 1)'
+  mainColor: `rgba(255, 0, 0, 1)`
 };
 
 const TEXT = {
   startX: 120,
   startY: 30,
-  font: '16px PT Mono',
-  color: '#000',
-  baseline: 'hanging',
+  font: `16px PT Mono`,
+  color: `#000`,
+  baseline: `hanging`,
   lineHeight: 16,
   lineGap: 5
 };
@@ -51,7 +51,7 @@ const renderCloud = function (ctx, x, y, width, height, radius, color) {
 
 const getRandomBlue = function () {
   const s = Math.floor(Math.random() * 100) + 1;
-  return 'hsl(240, ' + s + '%, 50%)';
+  return `hsl(240, ` + s + `%, 50%)`;
 };
 
 const renderBar = function (ctx, x, y, width, height, color) {
@@ -73,14 +73,14 @@ const getMaxElement = function (arr) {
 window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD.startX + SHADOW.shift, CLOUD.startY + SHADOW.shift, CLOUD.width, CLOUD.height, CLOUD.radius, SHADOW.color);
   renderCloud(ctx, CLOUD.startX, CLOUD.startY, CLOUD.width, CLOUD.height, CLOUD.radius, CLOUD.color);
-  writeText(ctx, TEXT.startX, TEXT.startY, TEXT.font, TEXT.baseline, TEXT.color, 'Ура, вы победили!');
-  writeText(ctx, TEXT.startX, TEXT.startY + TEXT.lineHeight, TEXT.font, TEXT.baseline, TEXT.color, 'Список результатов:');
+  writeText(ctx, TEXT.startX, TEXT.startY, TEXT.font, TEXT.baseline, TEXT.color, `Ура, вы победили!`);
+  writeText(ctx, TEXT.startX, TEXT.startY + TEXT.lineHeight, TEXT.font, TEXT.baseline, TEXT.color, `Список результатов:`);
 
   const maxTime = getMaxElement(times);
 
   players.forEach(function (player, i) {
     let barColor = getRandomBlue();
-    if (player === "Вы") {
+    if (player === `Вы`) {
       barColor = BAR.mainColor;
     }
     const barHeight = BAR.maxHeight * times[i] / maxTime;
