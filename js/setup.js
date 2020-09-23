@@ -1,9 +1,9 @@
 'use strict';
 
-const WIZARD_NAMES = [`Иван`, `Хуан Себастьян`, `Мария`, `Кристоф`, `Виктор`, `Юлия`, `Люпита`, `Вашингтон`];
-const WIZARD_SURNAMES = [`да Марья`, `Верон`, `Мирабелла`, `Вальц`, `Онопко`, `Топольницкая`, `Нионго`, `Ирвинг`];
-const WIZARD_COATCOLORS = [`rgb(101, 137, 164)`, `rgb(241, 43, 107)`, `rgb(146, 100, 161)`, `rgb(56, 159, 117)`, `rgb(215, 210, 55)`, `rgb(0, 0, 0)`];
-const WIZARD_EYESCOLORS = [`black`, `red`, `blue`, `yellow`, `green`];
+const wizardNames = [`Иван`, `Хуан Себастьян`, `Мария`, `Кристоф`, `Виктор`, `Юлия`, `Люпита`, `Вашингтон`];
+const wizardSurnames = [`да Марья`, `Верон`, `Мирабелла`, `Вальц`, `Онопко`, `Топольницкая`, `Нионго`, `Ирвинг`];
+const wizardCoatColors = [`rgb(101, 137, 164)`, `rgb(241, 43, 107)`, `rgb(146, 100, 161)`, `rgb(56, 159, 117)`, `rgb(215, 210, 55)`, `rgb(0, 0, 0)`];
+const wizardEyesColors = [`black`, `red`, `blue`, `yellow`, `green`];
 
 const setupWindow = document.querySelector(`.setup`);
 setupWindow.classList.remove(`hidden`);
@@ -24,9 +24,9 @@ let wizards = [];
 const renderWizardsArray = function (wizardsNumber) {
   for (let i = 0; i < wizardsNumber; i++) {
     wizards[i] = {};
-    wizards[i].name = getRandomElement(WIZARD_NAMES) + ` ` + getRandomElement(WIZARD_SURNAMES);
-    wizards[i].coatColor = getRandomElement(WIZARD_COATCOLORS);
-    wizards[i].eyesColor = getRandomElement(WIZARD_EYESCOLORS);
+    wizards[i].name = getRandomElement(wizardNames) + ` ` + getRandomElement(wizardSurnames);
+    wizards[i].coatColor = getRandomElement(wizardCoatColors);
+    wizards[i].eyesColor = getRandomElement(wizardEyesColors);
   }
   return wizards;
 };
