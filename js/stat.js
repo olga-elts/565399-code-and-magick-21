@@ -1,36 +1,36 @@
 'use strict';
 
-const CLOUD = {
-  startX: 100,
-  startY: 10,
-  width: 420,
-  height: 270,
-  radius: 20,
-  color: `#fff`
+const Cloud = {
+  START_X: 100,
+  START_Y: 10,
+  WIDTH: 420,
+  HEIGHT: 270,
+  RADIUS: 20,
+  COLOR: `#fff`
 };
 
-const SHADOW = {
-  shift: 10,
-  color: `rgba(0, 0, 0, 0.7)`
+const Shadow = {
+  SHIFT: 10,
+  COLOR: `rgba(0, 0, 0, 0.7)`
 };
 
-const BAR = {
-  startX: 140,
-  startY: 245,
-  width: 40,
-  maxHeight: 150,
-  gap: 50,
-  mainColor: `rgba(255, 0, 0, 1)`
+const Bar = {
+  START_X: 140,
+  START_Y: 245,
+  WIDTH: 40,
+  MAX_HEIGHT: 150,
+  GAP: 50,
+  MAIN_COLOR: `rgba(255, 0, 0, 1)`
 };
 
-const TEXT = {
-  startX: 120,
-  startY: 30,
-  font: `16px PT Mono`,
-  color: `#000`,
-  baseline: `hanging`,
-  lineHeight: 16,
-  lineGap: 5
+const Text = {
+  START_X: 120,
+  START_Y: 30,
+  FONT: `16px PT Mono`,
+  COLOR: `#000`,
+  BASELINE: `hanging`,
+  LINE_HEIGHT: 16,
+  LINE_GAP: 5
 };
 
 const renderCloud = function (ctx, x, y, width, height, radius, color) {
@@ -71,21 +71,21 @@ const getMaxElement = function (arr) {
 };
 
 window.renderStatistics = function (ctx, players, times) {
-  renderCloud(ctx, CLOUD.startX + SHADOW.shift, CLOUD.startY + SHADOW.shift, CLOUD.width, CLOUD.height, CLOUD.radius, SHADOW.color);
-  renderCloud(ctx, CLOUD.startX, CLOUD.startY, CLOUD.width, CLOUD.height, CLOUD.radius, CLOUD.color);
-  writeText(ctx, TEXT.startX, TEXT.startY, TEXT.font, TEXT.baseline, TEXT.color, `Ура, вы победили!`);
-  writeText(ctx, TEXT.startX, TEXT.startY + TEXT.lineHeight, TEXT.font, TEXT.baseline, TEXT.color, `Список результатов:`);
+  renderCloud(ctx, Cloud.START_X + Shadow.SHIFT, Cloud.START_Y + Shadow.SHIFT, Cloud.WIDTH, Cloud.HEIGHT, Cloud.RADIUS, Shadow.COLOR);
+  renderCloud(ctx, Cloud.START_X, Cloud.START_Y, Cloud.WIDTH, Cloud.HEIGHT, Cloud.RADIUS, Cloud.COLOR);
+  writeText(ctx, Text.START_X, Text.START_Y, Text.FONT, Text.BASELINE, Text.COLOR, `Ура, вы победили!`);
+  writeText(ctx, Text.START_X, Text.START_Y + Text.LINE_HEIGHT, Text.FONT, Text.BASELINE, Text.COLOR, `Список результатов:`);
 
   const maxTime = getMaxElement(times);
 
   players.forEach(function (player, i) {
     let barColor = getRandomBlue();
     if (player === `Вы`) {
-      barColor = BAR.mainColor;
+      barColor = Bar.MAIN_COLOR;
     }
-    const barHeight = BAR.maxHeight * times[i] / maxTime;
-    renderBar(ctx, BAR.startX + (BAR.width + BAR.gap) * i, BAR.startY - barHeight, BAR.width, barHeight, barColor);
-    writeText(ctx, BAR.startX + (BAR.width + BAR.gap) * i, BAR.startY + TEXT.lineGap, TEXT.font, TEXT.baseline, TEXT.color, players[i]);
-    writeText(ctx, BAR.startX + (BAR.width + BAR.gap) * i, BAR.startY - barHeight - TEXT.lineHeight - TEXT.lineGap, TEXT.font, TEXT.baseline, TEXT.color, Math.round(times[i]));
+    const barHeight = Bar.MAX_HEIGHT * times[i] / maxTime;
+    renderBar(ctx, Bar.START_X + (Bar.WIDTH + Bar.GAP) * i, Bar.START_Y - barHeight, Bar.WIDTH, barHeight, barColor);
+    writeText(ctx, Bar.START_X + (Bar.WIDTH + Bar.GAP) * i, Bar.START_Y + Text.LINE_GAP, Text.FONT, Text.BASELINE, Text.COLOR, players[i]);
+    writeText(ctx, Bar.START_X + (Bar.WIDTH + Bar.GAP) * i, Bar.START_Y - barHeight - Text.LINE_HEIGHT - Text.LINE_GAP, Text.FONT, Text.BASELINE, Text.COLOR, Math.round(times[i]));
   });
 };
