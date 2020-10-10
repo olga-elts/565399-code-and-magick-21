@@ -23,7 +23,7 @@ const Bar = {
   MAIN_COLOR: `rgba(255, 0, 0, 1)`
 };
 
-const Text = {
+const Texts = {
   START_X: 120,
   START_Y: 30,
   FONT: `16px PT Mono`,
@@ -73,8 +73,8 @@ const getMaxElement = function (arr) {
 window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, Cloud.START_X + Shadow.SHIFT, Cloud.START_Y + Shadow.SHIFT, Cloud.WIDTH, Cloud.HEIGHT, Cloud.RADIUS, Shadow.COLOR);
   renderCloud(ctx, Cloud.START_X, Cloud.START_Y, Cloud.WIDTH, Cloud.HEIGHT, Cloud.RADIUS, Cloud.COLOR);
-  writeText(ctx, Text.START_X, Text.START_Y, Text.FONT, Text.BASELINE, Text.COLOR, `Ура, вы победили!`);
-  writeText(ctx, Text.START_X, Text.START_Y + Text.LINE_HEIGHT, Text.FONT, Text.BASELINE, Text.COLOR, `Список результатов:`);
+  writeText(ctx, Texts.START_X, Texts.START_Y, Texts.FONT, Texts.BASELINE, Texts.COLOR, `Ура, вы победили!`);
+  writeText(ctx, Texts.START_X, Texts.START_Y + Texts.LINE_HEIGHT, Texts.FONT, Texts.BASELINE, Texts.COLOR, `Список результатов:`);
 
   const maxTime = getMaxElement(times);
 
@@ -85,7 +85,7 @@ window.renderStatistics = function (ctx, players, times) {
     }
     const barHeight = Bar.MAX_HEIGHT * times[i] / maxTime;
     renderBar(ctx, Bar.START_X + (Bar.WIDTH + Bar.GAP) * i, Bar.START_Y - barHeight, Bar.WIDTH, barHeight, barColor);
-    writeText(ctx, Bar.START_X + (Bar.WIDTH + Bar.GAP) * i, Bar.START_Y + Text.LINE_GAP, Text.FONT, Text.BASELINE, Text.COLOR, players[i]);
-    writeText(ctx, Bar.START_X + (Bar.WIDTH + Bar.GAP) * i, Bar.START_Y - barHeight - Text.LINE_HEIGHT - Text.LINE_GAP, Text.FONT, Text.BASELINE, Text.COLOR, Math.round(times[i]));
+    writeText(ctx, Bar.START_X + (Bar.WIDTH + Bar.GAP) * i, Bar.START_Y + Texts.LINE_GAP, Texts.FONT, Texts.BASELINE, Texts.COLOR, players[i]);
+    writeText(ctx, Bar.START_X + (Bar.WIDTH + Bar.GAP) * i, Bar.START_Y - barHeight - Texts.LINE_HEIGHT - Texts.LINE_GAP, Texts.FONT, Texts.BASELINE, Texts.COLOR, Math.round(times[i]));
   });
 };
