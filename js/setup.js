@@ -148,45 +148,48 @@ const renderWizard = function (wizard) {
 
 const wizards = getWizardsArray(WIZARDS_NUMBER);
 
-const fragment = document.createDocumentFragment();
-for (let i = 0; i < wizards.length; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
-}
+/**
+ * Создает фрагмент документа, заполняет его DOM-элементами и присоединяет к основному дереву
+ * @param {Array} elements - массив DOM-элементов
+ */
+const appendFragment = function (elements) {
+  const fragment = document.createDocumentFragment();
+  const similarList = setupSimilar.querySelector(`.setup-similar-list`);
+  elements.forEach(function (element) {
+    fragment.appendChild(renderWizard(element));
+  });
+  similarList.appendChild(fragment);
+};
 
-const similarList = setupSimilar.querySelector(`.setup-similar-list`);
-similarList.appendChild(fragment);
+appendFragment(wizards);
 
-const wizardCoat = document.querySelector(`.wizard-coat`);
-const wizardEyes = document.querySelector(`.wizard-eyes`);
-const wizardFireball = document.querySelector(`.setup-fireball-wrap`);
+const setupPlayer = document.querySelector(`.setup-player`);
+// const wizardCoat = document.querySelector(`.wizard-coat`);
+// const wizardEyes = document.querySelector(`.wizard-eyes`);
+// const wizardFireball = document.querySelector(`.setup-fireball`);
 const coatColorInput = document.querySelector(`input[name=coat-color]`);
 const eyesColorInput = document.querySelector(`input[name=eyes-color]`);
 const fireballColorInput = document.querySelector(`input[name=fireball-color]`);
 
-/**
- * Задает рандомный цвет элемента из массива и записывает его в соответсвующий этому элементу input
- * @param {Object} element - DOM-элемент (svg или div)
- * @param {Object} input - input, соответсвующий DOM-элементу
- * @param {Array} colors - массив возможных цветов
-*/
-const setRandomColor = function (element, input, colors) {
-  let color = getRandomElement(colors);
-  if (element.nodeName === `DIV`) {
-    element.style.backgroundColor = color;
-  } else {
-    element.style.fill = color;
+const colorizeFunctions = {
+  'wizard-coat': function (element) {
+    element.style.fill = getRandomElement(Wizard.COAT_COLORS);
+    coatColorInput.value = getRandomElement(Wizard.COAT_COLORS);
+  },
+  'wizard-eyes': function (element) {
+    element.style.fill = getRandomElement(Wizard.COAT_COLORS);
+    eyesColorInput.value = getRandomElement(Wizard.EYES_COLORS);
+  },
+  'setup-fireball': function (element) {
+    element.parentNode.style.backgroundColor = getRandomElement(Wizard.FIREBALL_COLORS);
+    fireballColorInput.value = getRandomElement(Wizard.FIREBALL_COLORS);
   }
-  input.value = color;
 };
 
-wizardCoat.addEventListener(`click`, function () {
-  setRandomColor(wizardCoat, coatColorInput, Wizard.COAT_COLORS);
-});
-
-wizardEyes.addEventListener(`click`, function () {
-  setRandomColor(wizardEyes, eyesColorInput, Wizard.EYES_COLORS);
-});
-
-wizardFireball.addEventListener(`click`, function () {
-  setRandomColor(wizardFireball, fireballColorInput, Wizard.FIREBALL_COLORS);
+setupPlayer.addEventListener(`click`, function (evt) {
+  for (let key in colorizeFunctions) {
+    if (evt.target.classList.contains(key)) {
+      colorizeFunctions[key](evt.target);
+    }
+  }
 });
