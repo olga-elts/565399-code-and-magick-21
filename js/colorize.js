@@ -11,16 +11,19 @@
 
   const colorizeFunctions = {
     'wizard-coat': function (element) {
-      element.style.fill = window.wizard().coatColor;
-      coatColorInput.value = element.style.fill;
+      const coatColor = window.wizard().coatColor;
+      element.style.fill = coatColor;
+      coatColorInput.value = coatColor;
     },
     'wizard-eyes': function (element) {
-      element.style.fill = window.wizard().eyesColor;
-      eyesColorInput.value = element.style.fill;
+      const eyesColor = window.wizard().eyesColor;
+      element.style.fill = eyesColor;
+      eyesColorInput.value = eyesColor;
     },
     'setup-fireball': function (element) {
-      element.parentNode.style.backgroundColor = window.wizard().fireballColor;
-      fireballColorInput.value = element.parentNode.style.backgroundColor;
+      const fireballColor = window.wizard().fireballColor;
+      element.parentNode.style.backgroundColor = fireballColor;
+      fireballColorInput.value = fireballColor;
     }
   };
 
